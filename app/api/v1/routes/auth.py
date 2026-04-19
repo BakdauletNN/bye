@@ -1,6 +1,5 @@
 from fastapi import APIRouter, Body
 from schemas.auth_s import Auth, Register
-from a
 
 
 router = APIRouter(
