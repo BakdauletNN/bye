@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Query, Depends
 from typing import List, Optional
 from schemas.rooms_s import *
-from app.core.dependencies import Pagination
+from src.core.dependencies import Pagination
 
 
 router = APIRouter(prefix="/rooms", tags=["Rooms"])

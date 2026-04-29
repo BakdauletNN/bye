@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 import sys
 from pathlib import Path
-from app.api.v1.routes.rooms import router as room_r
-from app.api.v1.routes.auth import router as auth_r
+from src.api.v1.routes.rooms import router as room_r
+from src.api.v1.routes.auth import router as auth_r
 from core.config import stgs
 
 
