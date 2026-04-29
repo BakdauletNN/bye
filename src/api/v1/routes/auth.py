@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException, status, Depends
 from fastapi.security import OAuth2PasswordBearer
-from schemas.auth_s import Auth, Register, UserResponse, RecoveryRequest
+from src.schemas.auth_s import Auth, Register, UserResponse, RecoveryRequest
 
 
 router = APIRouter(prefix="/auth", tags=["Authentication"])

@@ -6,9 +6,6 @@ from typing import Optional
 class Corpus(str, Enum):
     A = "A"
     B = "B"
-    C = "C"
-    D = "D"
-
 
 class Gender(str, Enum):
     MALE = "m"
@@ -22,8 +19,8 @@ class RoomStatus(str, Enum):
 
 
 class RoomCreate(BaseModel): 
-    floor: int = Field(..., ge=1, le=5)
-    number: int = Field(..., ge=100, le=599)
+    floor: int = Field(..., ge=1, le=2)
+    number: int = Field(..., ge=100, le=202)
     qty_person: int = Field(default=4, ge=1, le=4)
     who: Gender
     corpus: Corpus
@@ -48,7 +45,7 @@ class RoomResponse(BaseModel):
 
 
 class RoomUpdate(BaseModel):
-    floor: Optional[int] = Field(None, ge=1, le=5)
-    number: Optional[int] = Field(None, ge=100, le=599)
+    floor: Optional[int] = Field(None, ge=1, le=2)
+    number: Optional[int] = Field(None, ge=100, le=202)
     who: Optional[Gender] = None
     status: Optional[RoomStatus] = None

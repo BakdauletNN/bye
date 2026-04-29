@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Query, Depends
 from typing import List, Optional
-from schemas.rooms_s import *
+from src.schemas.rooms_s import *
 from src.core.dependencies import Pagination
 
 
