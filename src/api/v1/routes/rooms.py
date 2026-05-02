@@ -10,9 +10,8 @@ from sqlalchemy import insert, select, update, delete
 router = APIRouter(prefix="/rooms", tags=["Rooms"])
 
 
-
 @router.post("/add", response_model=RoomResponse)
-async def create_room(room_data: RoomCreate, whois = Depends()):
+async def create_room(room_data: RoomCreate, whois=Depends()):
 
     # TODO: Проверить статус, если админ сохранить в БД
     async with async_ses_mkr() as session:
@@ -28,17 +27,17 @@ async def get_available_rooms(
     pgt: Pagination,
     corpus: Optional[Corpus] = Query(None),
     who: Optional[Gender] = Query(None),
-    floor: Optional[int] = Query(None, ge=1, le=2)
+    floor: Optional[int] = Query(None, ge=1, le=2),
 ):
     ans = []
     if pgt.page and pgt.per_page:
-        return ans[pgt.per_page*(pgt.page-1):][:pgt.per_page]
+        return ans[pgt.per_page * (pgt.page - 1) :][: pgt.per_page]
     pass
 
 
-@router.get("/{id_room}")
-async def get_room_info(id_room_input:int):
-    #check tole for admin, if not admin return info about room
+@router.get("/{id_room_input}", response_model=RoomResponse)
+async def get_room_info(id_room_input: int):
+    # check tole for admin, if not admin return info about room
 
     async with async_ses_mkr() as session:
         query = select(RoomModel).where(RoomModel.id_room == id_room_input)
@@ -48,12 +47,13 @@ async def get_room_info(id_room_input:int):
             raise HTTPException(status_code=404, detail="Room not found")
         return RoomResponse(
             id_room=room.id_room,
+            dormitory_id=room.dormitory_id,
             floor=room.floor,
             number=room.number,
             qty_person=room.qty_person,
             who=room.who,
             corpus=room.corpus,
-            status=RoomStatus(room.status)
+            status=RoomStatus(room.status),
         )
 
 

@@ -7,6 +7,7 @@ class Corpus(str, Enum):
     A = "A"
     B = "B"
 
+
 class Gender(str, Enum):
     MALE = "m"
     FEMALE = "f"
@@ -18,24 +19,23 @@ class RoomStatus(str, Enum):
     MAINTENANCE = "m"
 
 
-class RoomCreate(BaseModel): 
+class RoomCreate(BaseModel):
     floor: int = Field(..., ge=1, le=4)
     number: int = Field(..., ge=100, le=205)
     qty_person: int = Field(default=4, ge=1, le=4)
     who: Gender
     corpus: Corpus
 
-    @model_validator(mode='after')
-    def check_floor_matches_number(self) -> 'RoomCreate':
+    @model_validator(mode="after")
+    def check_floor_matches_number(self) -> "RoomCreate":
         if self.number // 100 != self.floor:
-            raise ValueError(
-                f"Enter between {self.floor}01-{self.floor}99"
-            )
+            raise ValueError(f"Enter between {self.floor}01-{self.floor}99")
         return self
 
 
-class RoomResponse(BaseModel): 
-    id_room: int 
+class RoomResponse(BaseModel):
+    id_room: int
+    dormitory_id: int
     floor: int
     number: int
     qty_person: int
