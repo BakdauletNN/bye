@@ -19,8 +19,8 @@ class RoomStatus(str, Enum):
 
 
 class RoomCreate(BaseModel): 
-    floor: int = Field(..., ge=1, le=2)
-    number: int = Field(..., ge=100, le=202)
+    floor: int = Field(..., ge=1, le=4)
+    number: int = Field(..., ge=100, le=205)
     qty_person: int = Field(default=4, ge=1, le=4)
     who: Gender
     corpus: Corpus
@@ -45,7 +45,7 @@ class RoomResponse(BaseModel):
 
 
 class RoomUpdate(BaseModel):
-    floor: Optional[int] = Field(None, ge=1, le=2)
-    number: Optional[int] = Field(None, ge=100, le=202)
+    floor: Optional[int] = Field(None, ge=1, le=4)
+    number: Optional[int] = Field(None, ge=100, le=205)
     who: Optional[Gender] = None
     status: Optional[RoomStatus] = None

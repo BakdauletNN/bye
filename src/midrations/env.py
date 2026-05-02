@@ -7,12 +7,7 @@ import os
 
 from alembic import context
 from src.database.database import BaseModel
-from src.models.users import UserModel
-from src.models.students import StudentModel
-from src.models.applications import ApplicationModel
-from src.models.checkinns import CheckinsModel
-from src.models.dormitories import DormitoriesModel
-from src.models.rooms import RoomModel
+import src.models
 from src.core.config import stgs
 
 # this is the Alembic Config object, which provides
