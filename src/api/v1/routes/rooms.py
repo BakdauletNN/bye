@@ -60,8 +60,6 @@ async def get_room_info(id_room_input: int):
 @router.patch("/{id_room}", response_model=RoomResponse)
 async def update_room(id_room: int, room_update: RoomUpdate):
     # TODO: Проверить статус, если админ изменить в БД
-
-    
     pass
 
 
