@@ -8,6 +8,11 @@ class Settings(BaseSettings):
     DB_PASS: str
     DB_USER: str
 
+    SECRET_KEY: str
+    HASH__ALG0: str
+    ACCESS_TOKEN_EXPIRE_MINUTES: int
+    
+
 
     #DSN
     @property

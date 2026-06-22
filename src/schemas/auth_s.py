@@ -1,4 +1,11 @@
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, ConfigDict, EmailStr
+
+
+class User(BaseModel):
+    id: int
+    email: str
+    password_hash: str
+    model_config = ConfigDict(from_attributes=True)
 
 
 class Auth(BaseModel):
@@ -8,11 +15,8 @@ class Auth(BaseModel):
 
 class Register(BaseModel):
     name: str
-    surname: str
     id_std: int
     email: EmailStr
-    location: str
-    course: int
     password: str 
 
 
@@ -25,3 +29,7 @@ class UserResponse(BaseModel):
 
 class RecoveryRequest(BaseModel):
     email: EmailStr
+
+
+class UserWithHashPass(User):
+    hash_password: str

@@ -61,7 +61,7 @@ async def get_room_info(id_room_input: int):
 async def update_room(id_room: int, room_update: RoomUpdate):
     # TODO: Проверить статус, если админ изменить в БД
     pass
-
+    
 
 @router.delete("/{id_room}")
 async def delete_room(id_room: int):
