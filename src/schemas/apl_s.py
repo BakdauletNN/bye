@@ -1,11 +1,10 @@
-from pydantic import BaseModel, ConfigDict
 from datetime import datetime
-from typing import Optional
+from pydantic import BaseModel, ConfigDict, Field
 
 
 class ApplicationCreate(BaseModel):
-    corpus: str
-    preferred_floor: int
+    corpus: str = Field(..., pattern="^[A-D]$")
+    preferred_floor: int = Field(..., ge=1, le=4)
 
 
 class ApplicationResponse(BaseModel):

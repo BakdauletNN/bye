@@ -5,7 +5,6 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from src.models.students import StudentModel
 
-
 class UserModel(BaseModel):
     __tablename__ = "users"
 

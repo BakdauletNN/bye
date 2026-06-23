@@ -1,5 +1,5 @@
 from enum import Enum
-from pydantic import BaseModel, Field, model_validator
+from pydantic import BaseModel, ConfigDict, Field, model_validator
 from typing import Optional
 
 
@@ -21,15 +21,15 @@ class RoomStatus(str, Enum):
 
 class RoomCreate(BaseModel):
     floor: int = Field(..., ge=1, le=4)
-    number: int = Field(..., ge=100, le=205)
-    qty_person: int = Field(default=4, ge=1, le=4)
+    number: int = Field(..., ge=100, le=499)
+    qty_person: int = Field(default=4, ge=1, le=8)
     who: Gender
     corpus: Corpus
 
     @model_validator(mode="after")
     def check_floor_matches_number(self) -> "RoomCreate":
         if self.number // 100 != self.floor:
-            raise ValueError(f"Enter between {self.floor}01-{self.floor}99")
+            raise ValueError(f"Room number must start with floor digit: {self.floor}XX")
         return self
 
 
@@ -41,11 +41,14 @@ class RoomResponse(BaseModel):
     qty_person: int
     who: Gender
     corpus: Corpus
-    status: RoomStatus = RoomStatus.AVAILABLE
+    status: RoomStatus
+
+    #Source:"Pydantic v2 from_attributes ORM mode"
+    model_config = ConfigDict(from_attributes=True)
 
 
 class RoomUpdate(BaseModel):
     floor: Optional[int] = Field(None, ge=1, le=4)
-    number: Optional[int] = Field(None, ge=100, le=205)
+    number: Optional[int] = Field(None, ge=100, le=499)
     who: Optional[Gender] = None
     status: Optional[RoomStatus] = None

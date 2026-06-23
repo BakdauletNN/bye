@@ -17,8 +17,8 @@
         <section class="panel">
           <h2>Login</h2>
           <form id="login-form">
-            <label>Email</label>
-            <input type="email" name="username" required />
+            <label>Username</label>
+            <input type="text" name="username" required />
             <label>Password</label>
             <input type="password" name="password" required />
             <button type="submit">Login</button>
@@ -29,6 +29,17 @@
           <h2>Application</h2>
           <p>Use the backend API to manage students, rooms, applications and check-ins.</p>
           <div id="status-message">Backend status will appear here.</div>
+        </section>
+
+        <section class="panel" id="dashboard" style="display: none;">
+          <h2>Platform</h2>
+          <p id="dashboard-message"></p>
+          <button id="logout-button" type="button">Logout</button>
+        </section>
+
+        <section class="panel" id="rooms-panel" style="display: none;">
+          <h2>Available Rooms</h2>
+          <div id="rooms-container">Loading available rooms...</div>
         </section>
       </main>
     </div>

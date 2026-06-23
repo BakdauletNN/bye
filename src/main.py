@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from src.api.v1.routes.rooms import router as room_r
 from src.api.v1.routes.auth import router as auth_r
 from src.api.v1.routes.students import router as students_r
@@ -8,9 +9,19 @@ from src.api.v1.routes.analytics import router as analytics_r
 from src.admin.auth import router as admin_r
 
 app = FastAPI(
-    title="Smart Dormitory System",
-    description="Dormitory management system",
+    title="Dorm system",
+    description="System managing dormitory operations",
     version="1.0.0",
+)
+
+# CORS for frontend access (if needed)
+# Source: "FastAPI CORS middleware"
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # In production, specify allowed origins
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 app.include_router(auth_r)

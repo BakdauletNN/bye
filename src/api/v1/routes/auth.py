@@ -1,6 +1,7 @@
 from fastapi import APIRouter, HTTPException, Depends
 from fastapi.security import OAuth2PasswordBearer
 from passlib.context import CryptContext
+from passlib.exc import UnknownHashError
 from datetime import datetime, timedelta
 from src.schemas.auth_s import Auth, Register, TokenResponse, UserResponse, RecoveryRequest
 from src.repositories.user_repo import UserRepo
@@ -30,7 +31,14 @@ async def login(auth_data: Auth, session: AsyncSession = Depends(get_session)):
     user = await UserRepo(session).get_by_username(auth_data.username)
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
-    if not pwd_context.verify(auth_data.password, user.password_hash):
+    try:
+        valid = pwd_context.verify(auth_data.password, user.password_hash)
+    except UnknownHashError:
+        raise HTTPException(
+            status_code=500,
+            detail="Stored password hash is invalid. Recreate the user with a proper bcrypt hash.",
+        )
+    if not valid:
         raise HTTPException(status_code=401, detail="Incorrect password")
     token = create_access_token(user.username)
     return TokenResponse(access_token=token)
