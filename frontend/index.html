@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smart Dormitory Frontend</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header>
+        <h1>Smart Dormitory System</h1>
+        <p>Frontend demo for student dorm management.</p>
+      </header>
+
+      <main>
+        <section class="panel">
+          <h2>Login</h2>
+          <form id="login-form">
+            <label>Email</label>
+            <input type="email" name="username" required />
+            <label>Password</label>
+            <input type="password" name="password" required />
+            <button type="submit">Login</button>
+          </form>
+        </section>
+
+        <section class="panel">
+          <h2>Application</h2>
+          <p>Use the backend API to manage students, rooms, applications and check-ins.</p>
+          <div id="status-message">Backend status will appear here.</div>
+        </section>
+      </main>
+    </div>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
